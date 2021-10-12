@@ -32,22 +32,6 @@ rsf.score(X_test, y_test)
 
 surv = rsf.predict_survival_function(X_test)
 
-# for i, s in enumerate(surv):
-#     plt.step(rsf.event_times_, s, where="post", label=str(i))
-# plt.ylabel("Survival probability")
-# plt.xlabel("Time in days")
-# plt.grid(True)
-# plt.legend()
-#
-#
-# surv = rsf.predict_cumulative_hazard_function(X_test)
-# for i, s in enumerate(surv):
-#     plt.step(rsf.event_times_, s, where="post", label=str(i))
-# plt.ylabel("Cumulative hazard")
-# plt.xlabel("Time in days")
-# plt.grid(True)
-# plt.legend()
-
 perm = PermutationImportance(rsf, n_iter=15)
 perm.fit(X_test, y_test)
 pd.DataFrame({"name":dataset.columns[range(dataset.shape[1]-2)],"importance":perm.feature_importances_}).to_excel("importance.xlsx")
